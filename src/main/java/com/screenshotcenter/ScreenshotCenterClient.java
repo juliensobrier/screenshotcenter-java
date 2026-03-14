@@ -1,5 +1,6 @@
 package com.screenshotcenter;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -129,7 +130,15 @@ public class ScreenshotCenterClient {
         if (json.has("success") && !json.getBoolean("success")) {
             throw ApiError.fromJSON(json, resp.getStatus());
         }
-        return json.has("data") ? json.getJSONObject("data") : json;
+        if (!json.has("data")) return json;
+        Object data = json.get("data");
+        if (data instanceof JSONObject) return (JSONObject) data;
+        if (data instanceof JSONArray) {
+            JSONObject wrapper = new JSONObject();
+            wrapper.put("_array", data);
+            return wrapper;
+        }
+        return json;
     }
 
     private JSONObject safeParseJson(byte[] body) {

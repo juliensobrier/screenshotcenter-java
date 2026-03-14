@@ -74,6 +74,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.2.5</version>
             <configuration>
+              <excludes combine.self="override" />
               <includes>
                 <include>**/IntegrationTest.java</include>
               </includes>
