@@ -30,6 +30,7 @@ public class ScreenshotCenterClient {
 
     private final ScreenshotNamespace screenshotNs;
     private final BatchNamespace batchNs;
+    private final CrawlNamespace crawlNs;
     private final AccountNamespace accountNs;
 
     public ScreenshotCenterClient(String apiKey) {
@@ -46,11 +47,13 @@ public class ScreenshotCenterClient {
 
         this.screenshotNs = new ScreenshotNamespace(this);
         this.batchNs      = new BatchNamespace(this);
+        this.crawlNs      = new CrawlNamespace(this);
         this.accountNs    = new AccountNamespace(this);
     }
 
     public ScreenshotNamespace screenshot() { return screenshotNs; }
     public BatchNamespace batch()           { return batchNs; }
+    public CrawlNamespace crawl()           { return crawlNs; }
     public AccountNamespace account()       { return accountNs; }
 
     // ── Polling ───────────────────────────────────────────────────────────────
